@@ -1,0 +1,73 @@
+*{
+margin: 0;
+padding: 0;
+box-sizing: border-box;
+}
+body{
+font-family:'segoe UI', Tahoma, Geneva, Verdana, Sans-serif;
+height: 100vh;
+display: flex;
+justify-content: center;
+align-items: center;
+overflow: hidden;
+}
+
+.background{
+position: fixed;
+top: 0;
+left: 0;
+width: 100%;
+height:100%;
+background-image:url('img scr='20250606-WA0180.jpeg')
+background-size: cover;
+background-position: center;
+filter: brightness(0.7);
+z-index: -1;
+}
+
+.container{
+width: 100%;
+max-width: 400px;
+padding: 20px;
+}
+.glass-card input: :placeholder {
+clor: rgba(255, 255, 0.6);
+}
+.glass-card button{ width:100%;
+background-color: rgba(255, 255, 0.2);
+color: white;
+padding: 12px;
+border: none;
+font-size:16px;
+cursor: pointer;
+transition: background 0.3s ease;
+}
+.glass-card button: hover {
+background-color:rgba(255, 255,255, 0,3);
+}
+
+.footer{
+margin: 20px;
+text-align: center;
+font-size: 14px;
+}
+
+.footer a{
+color: #fff;
+text-decoration: uderline;
+font-weight: 500;
+}
+
+.footer a:hover{
+opacity: 0.8;
+}
+
+@keyframes fadeinup{from{
+opacity: 0;
+transform: translateY(20px)
+}
+to {
+opacity: 1;
+transform: translateY(0);
+}
+}

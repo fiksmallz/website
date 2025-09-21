@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport"content="width=device-width,initial-scale=1.0"/>
+  <title>To-Do List</title>
+  <style>
+    body {
+      font-family:sans-serif;
+      background:#3d3c3d;
+      display: flex;
+      justify-content:center;
+      padding: 50px;
+    }
+    .todo-container {
+      background:rgb(53, 146, 69);
+      padding:20px;
+      border-radius:10px;
+      width: 300px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+    h2 {
+      text-align:center;
+      margin-bottom:20px;
+    }
+    input, button {
+      padding:10px;
+      border-radius: 5px;
+      border:1px solid #e71616;
+    }
+    input {
+      width:70%;
+    }
+    button {
+      width: 25%;
+      background:#2563eb;
+      color:rgb(235, 222, 222);
+      cursor:pointer;
+    }
+    ul {
+      list-style:none;
+      padding:0;
+      margin-top:20px;
+    }
+    li {
+      background:#3f5c83;
+      margin-bottom:10px;
+      padding:8px;
+      border-radius:5px;
+      display:flex;
+      justify-content:space-between;
+    }
+    li.done {
+      text-decoration:line-through;
+      opacity:0.6;
+    }
+    li span {
+      cursor:pointer;
+    }
+    li button {
+      background:red;
+      color:rgba(172, 65, 65, 0.788);
+      border:none;
+      border-radius:50%;
+      width:20px;
+      height:20px;
+      font-weight:bold;
+      cursor:pointer;
+    }
+  </style>
+</head>
+<body>
+  <div class="todo-container">
+    <h2>📝My To-Do List</h2>
+    <div>
+      <input id="taskInput"type="text"placeholder="New task">
+      <button onclick="addTask()">Add</button>
+    </div>
+    <ul id="taskList"></ul>
+  </div>
+
+  <script>
+    const defaultTasks=[
+      {text:"wake up early",done:false},
+      {text:"",done:false},
+      {text:"", done:false},
+      {text:"", done:false},
+      
+    ];
+
+    function getTasks() {
+      const saved=localStorage.getItem("tasks");
+      if (!saved) {
+        saveTasks(defaultTasks);
+        return defaultTasks;
+      }
+      return JSON.parse(saved);
+    }
+
+    function saveTasks(tasks) {
+      localStorage.setItem("tasks",JSON.stringify(tasks));
+    }
+
+    function renderTasks() {
+      const list=document.getElementById("taskList");
+      list.innerHTML= "";
+      const tasks=getTasks();
+
+      tasks.forEach((task,index)=> {
+        const li=document.createElement("li");
+        li.className=task.done ? "done" : "";
+        li.innerHTML= `
+          <span onclick="toggle(${index})">${task.text}</span>
+          <button onclick="remove(${index})">&times;</button>
+        `;
+        list.appendChild(li);
+      });
+    }
+
+    function addTask() {
+      const input=document.getElementById("taskInput");
+      const text=input.value.trim();
+      if (!text) return;
+
+      const tasks=getTasks();
+      tasks.push({text:text,done:false });
+      saveTasks(tasks);
+      input.value="";
+      renderTasks();
+    }
+
+    function toggle(index) {
+      const tasks = getTasks();
+      tasks[index].done=!tasks[index].done;
+      saveTasks(tasks);
+      renderTasks();
+    }
+
+    function remove(index) {
+      const tasks=getTasks();
+      tasks.splice(index,1);
+      saveTasks(tasks);
+      renderTasks();
+    }
+
+    renderTasks();
+  </script>
+</body>
+</html>

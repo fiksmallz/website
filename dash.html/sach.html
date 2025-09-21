@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Dashboard with Chart</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body class="bg-gray-100 font-sans">
+
+  <div class="flex min-h-screen">
+    <!-- Sidebar -->
+    <aside class="w-64 bg-white hidden md:block shadow-md">
+      <div class="p-6 text-xl font-bold border-b">My Dashboard</div>
+      <ul class="p-6 space-y-4 text-gray-700">
+        <li class="hover:text-blue-500"><a href="#">🏠 Dashboard</a></li>
+        <li class="hover:text-blue-500"><a href="#">📦 Products</a></li>
+        <li class="hover:text-blue-500"><a href="#">👥 Users</a></li>
+        <li class="hover:text-blue-500"><a href="#">📈 Reports</a></li>
+        <li class="hover:text-blue-500"><a href="#">⚙️ Settings</a></li>
+      </ul>
+    </aside>
+
+    <!-- Main content -->
+    <div class="flex-1">
+      <!-- Navbar -->
+      <header class="bg-white shadow-md p-4 flex justify-between items-center">
+        <h1 class="text-xl font-semibold">Dashboard</h1>
+        <div class="flex items-center space-x-4">
+          <span>Hello, Shafik</span>
+          <img src="https://i.pravatar.cc/40" alt="avatar" class="rounded-full w-10 h-10" />
+        </div>
+      </header>
+
+      <!-- Stats -->
+      <section class="p-6 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div class="bg-white p-4 rounded-lg shadow">
+          <p class="text-gray-500">Revenue</p>
+          <h2 class="text-2xl font-bold">$24,000</h2>
+        </div>
+        <div class="bg-white p-4 rounded-lg shadow">
+          <p class="text-gray-500">Users</p>
+          <h2 class="text-2xl font-bold">1,200</h2>
+        </div>
+        <div class="bg-white p-4 rounded-lg shadow">
+          <p class="text-gray-500">Sales</p>
+          <h2 class="text-2xl font-bold">320</h2>
+        </div>
+        <div class="bg-white p-4 rounded-lg shadow">
+          <p class="text-gray-500">Performance</p>
+          <h2 class="text-2xl font-bold">85%</h2>
+        </div>
+      </section>
+
+      <!-- Chart and Table -->
+      <section class="p-6 grid grid-cols-1 lg:grid-cols-2 gap-6">
+        <!-- Chart -->
+        <div class="bg-white p-6 rounded-lg shadow">
+          <h3 class="text-lg font-semibold mb-4">Monthly Sales</h3>
+          <canvas id="salesChart" height="150"></canvas>
+        </div>
+
+        <!-- Table -->
+        <div class="bg-white p-6 rounded-lg shadow">
+          <h3 class="text-lg font-semibold mb-4">Recent Activity</h3>
+          <table class="w-full text-left">
+            <thead>
+              <tr>
+                <th class="pb-2 text-gray-500">User</th>
+                <th class="pb-2 text-gray-500">Action</th>
+                <th class="pb-2 text-gray-500">Date</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr class="border-t">
+                <td class="py-2">Jane Doe</td>
+                <td>Signed up</td>
+                <td>July 28</td>
+              </tr>
+              <tr class="border-t">
+                <td class="py-2">John Smith</td>
+                <td>Made purchase</td>
+                <td>July 27</td>
+              </tr>
+              <tr class="border-t">
+                <td class="py-2">Alice</td>
+                <td>Updated profile</td>
+                <td>July 26</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+    </div>
+  </div>
+
+  <!-- Chart Script -->
+  <script>
+    const ctx = document.getElementById('salesChart').getContext('2d');
+    const salesChart = new Chart(ctx, {
+      type: 'line',
+      data: {
+        labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul'],
+        datasets: [{
+          label: 'Sales',
+          data: [300, 500, 400, 600, 700, 800, 900],
+          fill: true,
+          backgroundColor: 'rgba(59, 130, 246, 0.1)',
+          borderColor: '#3b82f6',
+          tension: 0.4
+        }]
+      },
+      options: {
+        responsive: true,
+        plugins: {
+          legend: {
+            display: false
+          }
+        },
+        scales: {
+          y: {
+            beginAtZero: true
+          }
+        }
+      }
+    });
+  </script>
+</body>
+</html>
+
